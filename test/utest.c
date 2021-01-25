@@ -473,7 +473,7 @@ static app_cfg_t options[] = {
     {
         CFG_KEY_NULL, "rc_type", CFG_TYPE_INTEGER,
         &cfg.rc_type,
-        "rc_type (default: 0-CQP, allowed values: 1-CRF, 2-ABR, 3-CBR)"
+        "rc_type (default: 0-CQP, allowed values: 1-CRF, 2-ABR, 3-CBR, 4-FIXQP)"
         ,0
     },
     {

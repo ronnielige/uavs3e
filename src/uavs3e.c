@@ -932,7 +932,12 @@ void enc_get_pic_qp(enc_pic_t *ep, pic_thd_param_t *p)
     }
     if (param->rc_type == RC_TYPE_NULL) {
         base_qp = (int)(enc_get_hgop_qp(param->qp, pic_org->layer_id, info->sqh.low_delay) + 0.5);
-    } else {
+    }
+    else if (param->rc_type == RC_TYPE_FIXQP) // FIXQP means qp is the same between all frames
+    {
+        base_qp = param->qp;
+    }
+    else {
         int qp_l0 = p->top_pic[0] ? ((int)(p->top_pic[0]->picture_qp_real + 0.5) + (p->top_pic[0]->layer_id == FRM_DEPTH_0 ? 3 : 0)) : -1;
         int qp_l1 = p->top_pic[1] ? ((int)(p->top_pic[1]->picture_qp_real + 0.5) + (p->top_pic[1]->layer_id == FRM_DEPTH_0 ? 3 : 0)) : -1;
         base_qp = rc_get_qp(p->rc, pic_org, qp_l0, qp_l1);
